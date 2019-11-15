@@ -61,12 +61,12 @@ public class MainActivity extends AppCompatActivity {
                                         usu.setText(document.getData().get("usuario").toString());
                                         //clave.setText(document.getData().get("clave").toString());
 
-
+                                        /*
                                         String eusuario = usu.getText().toString(); //Variable que yo voy a mandar a la otra actividad
                                         Intent conectado = new Intent(getApplicationContext(),clientelogeado.class);
                                         conectado.putExtra("rusuario",eusuario); //El metodo PutExtra manda la variable eusuario y la recibe la variable rusuario
                                         startActivity(conectado); //Esto Lounchea la actividad Main2Activity
-
+                                        */
                                         Toast.makeText(getApplicationContext(),"Usuario y contraseña encontrado",Toast.LENGTH_SHORT).show();
                                         //Toast.makeText(getApplicationContext(),"Usuario:"+usuario,Toast.LENGTH_SHORT).show();
 
