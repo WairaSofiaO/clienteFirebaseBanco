@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "707152915896",
+    "firebase_url": "https://clientefirebasebanco.firebaseio.com",
+    "project_id": "clientefirebasebanco",
+    "storage_bucket": "clientefirebasebanco.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:707152915896:android:1358957aeda48dca3e334d",
+        "android_client_info": {
+          "package_name": "com.example.clientefirebasebanco"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "707152915896-htdjji94uoofnidnmfhciebrtqhdsm0u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.clientefirebasebanco",
+            "certificate_hash": "2229ec437dd4ff9f5d4c96e4e76246135c6fee2f"
+          }
+        },
+        {
+          "client_id": "707152915896-m0l85muukijqolgahsibln8009867hh5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJiCYy15aSHy7YAKM5DmIWqiSYNyOGUiA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "707152915896-m0l85muukijqolgahsibln8009867hh5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

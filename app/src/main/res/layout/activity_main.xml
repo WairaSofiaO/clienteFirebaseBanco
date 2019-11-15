@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sistema Cartera:
+        Cliente"
+        android:gravity="center_horizontal"
+        />
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Usuario"
+        android:gravity="center_horizontal"
+        />
+    <EditText
+        android:id="@+id/etusuario"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:inputType="text"
+        />
+    <TextView
+        android:layout_marginTop="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Clave"
+        android:gravity="center_horizontal"
+        />
+    <EditText
+        android:id="@+id/etclave"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:inputType="numberPassword"
+        />
+
+    <Button
+        android:layout_marginTop="2dp"
+        android:text="Iniciar sesión"
+        android:id="@+id/btniniciarsesion"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        />
+    <EditText
+        android:layout_marginTop="2dp"
+        android:text="Registrarme"
+        android:id="@+id/btnregistrarme"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        />
+    <TextView
+        android:id="@+id/usu"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:gravity="center_horizontal"
+        />
+
+</LinearLayout>
