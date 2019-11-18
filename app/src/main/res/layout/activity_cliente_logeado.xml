@@ -5,14 +5,116 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ClienteLogeado"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_margin="30dp">
 
+    <!-- Usuario-->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal"
+            android:text="Usuario:" />
+        <TextView
+            android:id="@+id/tvnombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal"
+            android:textColor="#673AB7"/>
+    </LinearLayout>
+
+    <!-- Saldo-->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal"
+            android:text="Saldo:" />
+        <TextView
+            android:id="@+id/tvsaldo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal"
+            android:textColor="#673AB7"
+            />
+    </LinearLayout>
+
+    <!--Recargas-->
     <TextView
-        android:id="@+id/txtusuario"
+        android:text="Regargas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:gravity="center_horizontal" />
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        />
+        android:layout_marginHorizontal="20dp">
+
+        <EditText
+            android:id="@+id/etvalorrecarga"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Valor de su recarga"
+            android:inputType="numberDecimal"
+            android:layout_gravity="start"/>
+        <Button
+            android:id="@+id/btnrecargar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recargar"
+            android:layout_marginStart="50dp"/>
+    </LinearLayout>
+
+    <!--Pagos -->
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pagos"/>
+    <EditText
+        android:id="@+id/etvalorpago"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Valor a pagar"
+        android:inputType="numberDecimal"
+        android:layout_gravity="start"
+        android:layout_marginHorizontal="20dp"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/etcodfactura"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Numero de la factura"
+            android:inputType="number"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"/>
+        <Button
+            android:id="@+id/btnpagar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginStart="50dp"
+
+            android:text="Pagar" />
+    </LinearLayout>
+
+
+
+
+
 
 </LinearLayout>

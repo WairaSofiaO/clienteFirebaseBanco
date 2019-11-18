@@ -20,11 +20,11 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 public class MainActivity extends AppCompatActivity {
-    EditText usuario,clave,registrarme;
-    TextView usu;
+    EditText usuario,clave;
+    TextView id,registrarme;
     Button iniciarsesion;
     FirebaseFirestore db;
-    String idauto, nombres, apellidos, saldo;
+    String codcliente, getCodCliente,getNombres,getApellidos,getSaldo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,24 +32,24 @@ public class MainActivity extends AppCompatActivity {
 
         usuario = findViewById(R.id.etusuario);
         clave = findViewById(R.id.etclave);
-        usu = findViewById(R.id.usu);
+        id = findViewById(R.id.tvid);
         iniciarsesion = findViewById(R.id.btniniciarsesion);
         registrarme = findViewById(R.id.btnregistrarme);
+        usuario.getText().toString();
+        /* Mandar datos a otra activity */
 
-        //instanciar firebase firestore
+        /*instanciar firebase firestore*/
         db = FirebaseFirestore.getInstance();
 
-        //boton iniciar sesion
         iniciarsesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Funcion buscar usuario en la base de datos clientes
-                idauto=""; // verifica si no existe
+                /*Funcion buscar usuario en la base de datos clientes*/
+                codcliente=""; // verifica si no existe
                 db.collection("clientes")
                         /*Comparar valores usuario y clave*/
                         .whereEqualTo("usuario",usuario.getText().toString())
-                        .whereEqualTo( "clave",clave.getText().toString())
-                        /* ********** */
+                        .whereEqualTo("clave",clave.getText().toString())
                         .get()
                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
@@ -57,39 +57,52 @@ public class MainActivity extends AppCompatActivity {
                                 if (task.isSuccessful()){
                                     for (QueryDocumentSnapshot document : task.getResult()){
                                         //Log.d(TAG, document.getId() + " => " + document.getData());
-                                        idauto= document.getId();
-                                        usu.setText(document.getData().get("usuario").toString());
-                                        //clave.setText(document.getData().get("clave").toString());
 
-                                        /*
-                                        String eusuario = usu.getText().toString(); //Variable que yo voy a mandar a la otra actividad
-                                        Intent conectado = new Intent(getApplicationContext(),clientelogeado.class);
-                                        conectado.putExtra("rusuario",eusuario); //El metodo PutExtra manda la variable eusuario y la recibe la variable rusuario
+                                        /*Variable para verificar si existe o no */
+                                        codcliente = document.getId();
+                                        Toast.makeText(getApplicationContext(),"Ingreso exitoso",Toast.LENGTH_SHORT).show();
+                                        id.setText(codcliente);
+                                        /*Variables para mandar los datos del cliente a otra actividad*/
+                                        getNombres = document.getData().get("nombres").toString();
+                                        getApellidos = document.getData().get("apellidos").toString();
+                                        getSaldo = document.getData().get("saldo").toString();
+                                        irLogueado(codcliente,getNombres, getApellidos, getSaldo);
+                                        
+                                        //Toast.makeText(getApplicationContext(),getNombres,Toast.LENGTH_SHORT).show();
+                                        //codcliente.setText(document.getData().get("codcliente").toString());
+                                        //Toast.makeText(getApplicationContext(),document.getData().get("codcliente").toString(),Toast.LENGTH_SHORT).show();
+                                        //ident.setText(document.getData().get("identif").toString());
+                                        //String codcliente = document.getData().get("codCliente").toString();
+                                        /* Mandar datos a otra activity
+                                        String enviarUsuario= document.getData().get("usuario").toString();
+                                        //String enviarUsuario = usu.getText().toString(); //Variable que yo voy a mandar a la otra actividad
+                                        Intent conectado = new Intent(getApplicationContext(),ClienteLogeado.class);
+                                        conectado.putExtra("recibirUsuario",enviarUsuario); //El metodo PutExtra manda la variable eusuario y la recibe la variable rusuario
                                         startActivity(conectado); //Esto Lounchea la actividad Main2Activity
+                                        Intent conectado = new Intent(getApplicationContext(),ClienteLogeado.class);
+                                        conectado.putExtra("recibirId",id); //El metodo PutExtra man
                                         */
-                                        Toast.makeText(getApplicationContext(),"Usuario y contraseña encontrado",Toast.LENGTH_SHORT).show();
-                                        //Toast.makeText(getApplicationContext(),"Usuario:"+usuario,Toast.LENGTH_SHORT).show();
-
-                                        //startActivity(new Intent(getApplicationContext(),ClienteLogeado.class));
-
-
-
-
-
                                     }
-
-
-                                    if (idauto.isEmpty()){
-                                        Toast.makeText(getApplicationContext(),"Usuario y/o contraseña incorrectas",Toast.LENGTH_SHORT).show();
+                                    if (codcliente.isEmpty()){
+                                        Toast.makeText(getApplicationContext(),"Usuario y/o contraseña incorrecta",Toast.LENGTH_SHORT).show();
                                     } else {
                                         Log.w("clientes", "Error leyendo documento", task.getException());
                                     }
                                 }
                             }
                         });
-
             }
         });
     }
+    public void  irLogueado(String codcliente,String nombres,String apellidos,String saldo){
+        Intent irLog = new Intent(MainActivity.this, ClienteLogeado.class);
+        irLog.putExtra("codcliente",codcliente);
+        irLog.putExtra("nombres",nombres);
+        irLog.putExtra("apellidos",apellidos);
+        irLog.putExtra("saldo",saldo);
+        //irLog.putExtra("usuario",usuario.getText().toString());
 
+        startActivity(irLog);
+
+    }
 }
