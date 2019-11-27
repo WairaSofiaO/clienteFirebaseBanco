@@ -36,13 +36,16 @@ public class ClienteLogeado extends AppCompatActivity {
     EditText valorrecarga, valorpago,codfactura;
     TextView tvnombres,tvsaldo;
     Button recargar, pagar;
-    FirebaseFirestore db;
     String codcliente,nombres, apellidos,saldo;
+    FirebaseFirestore db;
+    UpdateSaldo updateSaldo = new UpdateSaldo();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cliente_logeado);
+        Recargas recargas = new Recargas();
 
         tvnombres = findViewById(R.id.tvnombre);
         tvsaldo = findViewById(R.id.tvsaldo);
@@ -75,9 +78,6 @@ public class ClienteLogeado extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         //Toast.makeText(getApplicationContext(),id.getText().toString(),Toast.LENGTH_SHORT).show();
 
-        //Funcion buscar usuario en la base de datos clientes
-        codcliente=""; // verifica si no existe
-
         recargar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,8 +95,10 @@ public class ClienteLogeado extends AppCompatActivity {
                             public void onSuccess(DocumentReference documentReference) {
                                 //Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
                                 Toast.makeText(getApplicationContext(),"Recarga Exitosa",Toast.LENGTH_SHORT).show();
-                                ProcesarSaldo(saldo,valorrecarga.getText().toString());
-                                //tvsaldo.setText(vlo);
+                                /*Actulizar saldo*/
+                                int saldoFinal =updateSaldo.ProcesarRecarga(codcliente,saldo,valorrecarga.getText().toString());
+                                tvsaldo.setText(saldoFinal);
+
 
                             }
                         })
@@ -118,13 +120,4 @@ public class ClienteLogeado extends AppCompatActivity {
 
 
     }
-    public int ProcesarSaldo(String valorRecarga, String saldoActual){
-        int intValorRecarga = Integer.parseInt(valorRecarga);
-        int intSaldoActual = Integer.parseInt(saldoActual);
-        int saldoFinal = intValorRecarga + intSaldoActual;
-        Toast.makeText(getApplicationContext(),"Saldo Actualizado: " + saldoFinal,Toast.LENGTH_SHORT).show();
-        //tvsaldo.setText(saldoFinal);
-        //valorrecarga.setText("");
-        return saldoFinal;
     }
-}
