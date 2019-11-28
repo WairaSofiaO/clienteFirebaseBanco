@@ -27,9 +27,21 @@ public class Factura {
 
  */
 
-    public Factura(String nroFact, int vlrFactura) {
+    public Factura(String codcliente,String nrofact,int valorPagoInt) {
         this.nroFact = nroFact;
-        this.vlrFactura = vlrFactura;
+        this.vlrFactura = valorPagoInt;
+        this.nroFact = nrofact;
+    }
+    public int ProcesarFactura(String codcliente,String nrofact,int valorPagoInt,int saldoInt){
+        //int saldoInt = Integer.parseInt(saldo);
+        //int intValorRecarga = Integer.parseInt(valorPagoInt);
+        int saldoFinal = saldoInt - valorPagoInt;
+
+        new Saldo().UpdateSaldo(codcliente,saldoFinal);
+        //setSaldo(saldoFinal);
+        new Factura(codcliente,nrofact,valorPagoInt);
+        return saldoFinal;
+
     }
 
     public int ReadFactura(String nroFact){

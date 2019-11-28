@@ -116,45 +116,9 @@ public class ClienteLogeado extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //modelSaldo.ReadSaldo();
+                //(nrofactura.getText().toString());
                 BuscarFactura(nrofactura.getText().toString());
-                //int valorPago = Integer.parseInt(BuscarFactura(nrofactura.getText().toString()));
-                /*
-                Toast.makeText(getApplicationContext(),"Pago realizado: " +valorpago.getText().toString(),Toast.LENGTH_SHORT).show();
-
-                int saldo = Integer.parseInt(tvsaldo.getText().toString());
-                //int valorPago = Integer.parseInt(valorpago.getText().toString());
-
-                if(saldo>=valorPago){
-                    Toast.makeText(getApplicationContext(),"Pago realizado: ",Toast.LENGTH_SHORT).show();
-                    //actualizarSaldoPago(codcliente,tvsaldo.getText().toString(),valorpago.getText().toString());
-                }else{
-                    Toast.makeText(getApplicationContext(),"Saldo Insuficiente: ",Toast.LENGTH_SHORT).show();
                 }
-                */
-
-
-
-
-                /*Leo el saldo actual
-                modelSaldo.ReadSaldo();
-                Factura factura = new Factura();
-                //new Factura(nrofactura.getText().toString());
-                int fact = new Factura().ReadFactura(nrofactura.getText().toString());
-
-                Toast.makeText(getApplicationContext(),"Valor fact "+fact,Toast.LENGTH_SHORT).show();
-                if (factura.getVlrFactura()==30000){
-                    Toast.makeText(getApplicationContext(),"Factura encontrada ",Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(getApplicationContext(),"Factura no encontrada: ",Toast.LENGTH_SHORT).show();
-                }
-                */
-
-
-                //String saldox = Integer.toString(modelSaldo.getSaldo());
-                //Toast.makeText(getApplicationContext(),"readsaldo: "+saldox,Toast.LENGTH_SHORT).show();
-
-
-            }
         });
 
 
@@ -170,9 +134,8 @@ public class ClienteLogeado extends AppCompatActivity {
         tvsaldo.setText(stringSaldoFinal);
     }
 
-    public String BuscarFactura(String nrofact){
+    public void BuscarFactura(String nrofact){
         codFactura=""; //variable para verificar si esta vacio no existe
-        valorPago="";
         db.collection("factura")
                 .whereEqualTo("nrofact",nrofact)
                 .get()
@@ -184,8 +147,14 @@ public class ClienteLogeado extends AppCompatActivity {
                                 //Log.d(TAG, document.getId() + " => " + document.getData());
                                 codFactura = document.getId(); //capturar el id del documento
                                 valorPago = document.getData().get("vlrfactura").toString();
+                                codcliente = document.getData().get("codcliente").toString();
+
                                 valorpago.setText(valorPago);
-                                Toast.makeText(getApplicationContext(),"la factura si existe",Toast.LENGTH_SHORT).show();
+
+                                //Toast.makeText(getApplicationContext(),"la factura si existe",Toast.LENGTH_SHORT).show();
+
+                                ProcesarFactura(codcliente,valorPago);
+
                             }
                             if (codFactura.isEmpty()){
                                 Toast.makeText(getApplicationContext(),"Nro de factura no existente",Toast.LENGTH_SHORT).show();
@@ -195,13 +164,32 @@ public class ClienteLogeado extends AppCompatActivity {
                         }
                     }
                 });
-        return valorPago;
+    }
+    public void ProcesarFactura(String codCliente, String valorPago){
+        int valorPagoInt= Integer.parseInt(valorPago);
+        String nrofact = nrofactura.getText().toString();
+        int saldoInt= Integer.parseInt(tvsaldo.getText().toString());
+
+        if (saldoInt>=valorPagoInt){
+            Factura factura = new Factura(codCliente,nrofact,valorPagoInt);
+
+            int saldoFinal = factura.ProcesarFactura(codcliente,nrofact,valorPagoInt,saldoInt);
+            Toast.makeText(getApplicationContext(),"Pago realizado",Toast.LENGTH_SHORT).show();
+            String stringSaldoFinal= Integer.toString(saldoFinal);
+            tvsaldo.setText(stringSaldoFinal);
+        }else{
+            Toast.makeText(getApplicationContext(),"Saldo insuficiente",Toast.LENGTH_SHORT).show();
+        }
+
+
+
     }
 
     public void actualizarSaldo(String codcliente, String saldo, String valorRecarga) {
         //Saldo recarga = new Saldo();
         int saldoInt= Integer.parseInt(saldo);
         Saldo recarga = new Saldo(codcliente,saldoInt);
+
         int saldoFinal = recarga.ProcesarRecarga(codcliente,saldo,valorRecarga);
         Toast.makeText(getApplicationContext(),"Saldo Actualizado a: "+saldoFinal,Toast.LENGTH_SHORT).show();
         String stringSaldoFinal= Integer.toString(saldoFinal);
