@@ -73,7 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Recargar"
-            android:layout_marginStart="50dp"/>
+            android:layout_marginStart="10dp"/>
     </LinearLayout>
 
     <!--Pagos -->
@@ -95,10 +95,10 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <EditText
-            android:id="@+id/etcodfactura"
+            android:id="@+id/etnrofactura"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Numero de la factura"
+            android:hint="Numero de factura"
             android:inputType="number"
             android:layout_gravity="start"
             android:layout_marginStart="20dp"/>
@@ -107,7 +107,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_marginStart="50dp"
+            android:layout_marginStart="10dp"
 
             android:text="Pagar" />
     </LinearLayout>

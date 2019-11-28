@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         iniciarsesion = findViewById(R.id.btniniciarsesion);
         registrarme = findViewById(R.id.btnregistrarme);
         usuario.getText().toString();
+
         /* Mandar datos a otra activity */
 
         /*instanciar firebase firestore*/
@@ -62,26 +63,15 @@ public class MainActivity extends AppCompatActivity {
                                         codcliente = document.getId();
                                         Toast.makeText(getApplicationContext(),"Ingreso exitoso",Toast.LENGTH_SHORT).show();
                                         id.setText(codcliente);
+
                                         /*Variables para mandar los datos del cliente a otra actividad*/
                                         getNombres = document.getData().get("nombres").toString();
                                         getApellidos = document.getData().get("apellidos").toString();
                                         getSaldo = document.getData().get("saldo").toString();
+
+                                        getInfoCliente(codcliente, getNombres, getApellidos, getSaldo);
+
                                         irLogueado(codcliente,getNombres, getApellidos, getSaldo);
-                                        
-                                        //Toast.makeText(getApplicationContext(),getNombres,Toast.LENGTH_SHORT).show();
-                                        //codcliente.setText(document.getData().get("codcliente").toString());
-                                        //Toast.makeText(getApplicationContext(),document.getData().get("codcliente").toString(),Toast.LENGTH_SHORT).show();
-                                        //ident.setText(document.getData().get("identif").toString());
-                                        //String codcliente = document.getData().get("codCliente").toString();
-                                        /* Mandar datos a otra activity
-                                        String enviarUsuario= document.getData().get("usuario").toString();
-                                        //String enviarUsuario = usu.getText().toString(); //Variable que yo voy a mandar a la otra actividad
-                                        Intent conectado = new Intent(getApplicationContext(),ClienteLogeado.class);
-                                        conectado.putExtra("recibirUsuario",enviarUsuario); //El metodo PutExtra manda la variable eusuario y la recibe la variable rusuario
-                                        startActivity(conectado); //Esto Lounchea la actividad Main2Activity
-                                        Intent conectado = new Intent(getApplicationContext(),ClienteLogeado.class);
-                                        conectado.putExtra("recibirId",id); //El metodo PutExtra man
-                                        */
                                     }
                                     if (codcliente.isEmpty()){
                                         Toast.makeText(getApplicationContext(),"Usuario y/o contraseña incorrecta",Toast.LENGTH_SHORT).show();
@@ -94,6 +84,30 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void getInfoCliente(String codcliente, String nombres, String apellidos, String saldo) {
+
+        int saldoInt = Integer.parseInt(saldo);
+        String getUsuario = usuario.getText().toString();
+        String getClave= clave.getText().toString();
+        Toast.makeText(getApplicationContext(),"USUARIO: "+getUsuario,Toast.LENGTH_SHORT).show();
+        Cliente infoCliente = new Cliente(codcliente, nombres, apellidos, saldoInt,getUsuario,getClave);
+
+        /*
+        info.setCodCliente(codcliente);
+        info.setNombres(nombres);
+        info.setApellidos(apellidos);
+        info.setSaldo(SaldoInt);
+        info.setUsuario(usuario.getText().toString());
+        info.setClave(clave.getText().toString());
+        String saldox = info.getCodCliente();
+        //Toast.makeText(getApplicationContext(),saldox,Toast.LENGTH_SHORT).show();
+        return info;
+
+         */
+
+    }
+
     public void  irLogueado(String codcliente,String nombres,String apellidos,String saldo){
         Intent irLog = new Intent(MainActivity.this, ClienteLogeado.class);
         irLog.putExtra("codcliente",codcliente);
