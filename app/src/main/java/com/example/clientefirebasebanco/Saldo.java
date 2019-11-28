@@ -61,6 +61,18 @@ public class Saldo {
         setSaldo(saldoFinal);
         return saldoFinal;
     }
+    public int ProcesarPago(String codcliente, String saldo, String valorRecarga){
+        //String codCliente = this.getCodCliente();
+        //int saldoActual = this.getSaldo();
+        int saldoInt = Integer.parseInt(saldo);
+        int intValorRecarga = Integer.parseInt(valorRecarga);
+        int saldoFinal = saldoInt - intValorRecarga;
+
+        new Saldo().UpdateSaldo(codcliente,saldoFinal);
+
+        setSaldo(saldoFinal);
+        return saldoFinal;
+    }
     public void ReadSaldo(){
         final String codCliente = getCodCliente();
         db.collection("clientes")
